@@ -139,15 +139,20 @@ If you want to serve a file from a remote storage via HTTP protocol. All you nee
     location ~* ^/protected/(.*) {
         internal;
 
-        resolver 8.8.8.8 8.8.4.4; #Security Tips: Use hosting services internal DNS resolver addresses as possible
+        # SECURITY: Use hosting services internal DNS resolver addresseses as possible
+        resolver 8.8.8.8 8.8.4.4;
+
         proxy_http_version     1.1;
         proxy_set_header       Authorization '';
-        #proxy_hide_header      x-amz-id-2;
-        #proxy_hide_header      x-amz-request-id;
         proxy_ignore_headers   "Set-Cookie";
         proxy_buffering        off;
         proxy_intercept_errors on;
         proxy_cache            off;
+        
+        # Your Storage HTTP Access Custom Headers
+        # proxy_hide_header      x-amz-id-2;
+        # proxy_hide_header      x-amz-request-id;
+
         proxy_pass http://$1$is_args$args;
 
     }
@@ -156,7 +161,7 @@ Then on ``sendfile()`` filename argument just replace the value from file path t
 
 ::
 
-    remote_file = "scheme://netloc/path;parameters?query#fragment"
+    remote_file = "scheme://netloc/path?query_string_key=query_string_value"
     sendfile(request, filename='remote_file')
 
 You need to pay attention to whether you have trailing slashes or not on the SENDFILE_URL and root values, otherwise you may not get the right URL being sent to NGINX and you may get 404s.  You should be able to see what file NGINX is trying to load in the error.log if this happens.  From there it should be fairly easy to work out what the right settings are.
