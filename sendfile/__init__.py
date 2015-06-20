@@ -1,4 +1,4 @@
-VERSION = (0, 3, 6)
+VERSION = (0, 3, 7)
 __version__ = '.'.join(map(str, VERSION))
 
 import os
@@ -23,7 +23,10 @@ def _lazy_load(fn):
 
 @_lazy_load
 def _get_sendfile():
-    from django.utils.importlib import import_module
+    try:
+        from importlib import import_module
+    except ImportError:
+        from django.utils.importlib import import_module
     from django.conf import settings
     from django.core.exceptions import ImproperlyConfigured
 

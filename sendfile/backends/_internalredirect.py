@@ -1,7 +1,6 @@
 import os
 from urlparse import urlparse
 from django.conf import settings
-from django.utils.http import urlquote
 
 
 def _convert_file_to_url(filename):
@@ -25,4 +24,4 @@ def _convert_file_to_url(filename):
             relpath, head = os.path.split(relpath)
             url.insert(1, head)
 
-    return urlquote(u'/'.join(url))
+    return u'/'.join(url)
