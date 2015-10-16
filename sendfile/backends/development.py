@@ -1,6 +1,8 @@
+from django.shortcuts import redirect
 from django.views.static import serve
 
 import os.path
+from urlparse import urlparse
 
 
 def sendfile(request, filename, **kwargs):
@@ -11,6 +13,10 @@ def sendfile(request, filename, **kwargs):
     this is only to be used when developing and is provided
     for convenience only
     '''
+    parseresult = urlparse(filename)
+    if parseresult.scheme:
+        return redirect(filename)
+
     dirname = os.path.dirname(filename)
     basename = os.path.basename(filename)
     return serve(request, basename, dirname)
