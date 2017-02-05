@@ -12,11 +12,11 @@ version = __import__('sendfile').__version__
 setup(
     name='django-sendfile',
     version=version,
-    description='Abstraction to offload file uploads to web-server (e.g. Apache with mod_xsendfile) once Django has checked permissions etc.',
+    description='*CUSTOM BUILD* Abstraction to offload file uploads to web-server (e.g. Apache with mod_xsendfile) once Django has checked permissions etc.',
     long_description=open('README.rst').read(),
     author='John Montgomery',
     author_email='john@sensibledevelopment.com',
-    url='https://github.com/johnsensible/django-sendfile',
+    url='https://github.com/kbussell/django-sendfile',
     license='BSD',
 
     requires=['Django (>=1.3)'],

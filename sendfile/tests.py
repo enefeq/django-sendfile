@@ -128,3 +128,17 @@ class TestNginxBackend(TempFileTestCase):
         response = real_sendfile(HttpRequest(), filepath)
         self.assertTrue(response is not None)
         self.assertEqual(u'/private/péter_là_gueule.txt'.encode('utf-8'), response['X-Accel-Redirect'])
+
+
+class TestDevelopmentBackend(TempFileTestCase):
+
+    def setUp(self):
+        super(TestDevelopmentBackend, self).setUp()
+        settings.SENDFILE_BACKEND = 'sendfile.backends.development'
+        _get_sendfile.clear()
+
+    def test_filename_is_url(self):
+        filepath = 'http://www.example.org'
+        response = real_sendfile(HttpRequest(), filepath)
+        self.assertTrue(response is not None)
+        self.assertEqual(1, 2)

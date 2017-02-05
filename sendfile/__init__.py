@@ -1,4 +1,4 @@
-VERSION = (0, 3, 10)
+VERSION = (0, 3, 10, 1)
 __version__ = '.'.join(map(str, VERSION))
 
 import os
@@ -91,7 +91,7 @@ def sendfile(request, filename, attachment=False, attachment_filename=None, mime
                 # Django 1.3
                 from django.utils.encoding import force_unicode as force_text
             attachment_filename = force_text(attachment_filename)
-            ascii_filename = unicodedata.normalize('NFKD', attachment_filename).encode('ascii','ignore') 
+            ascii_filename = unicodedata.normalize('NFKD', attachment_filename).encode('ascii','ignore')
             parts.append('filename="%s"' % ascii_filename)
             if ascii_filename != attachment_filename:
                 from django.utils.http import urlquote
