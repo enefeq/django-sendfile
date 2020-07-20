@@ -1,8 +1,10 @@
+from future import standard_library
+standard_library.install_aliases()
 from django.shortcuts import redirect
 from django.views.static import serve
 
 import os.path
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 
 def sendfile(request, filename, **kwargs):

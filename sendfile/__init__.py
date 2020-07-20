@@ -1,10 +1,13 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import map
 VERSION = (0, 3, 11, 1)
 __version__ = '.'.join(map(str, VERSION))
 
 import os
 import contextlib
-import urllib2
-from urlparse import urlparse
+import urllib.request
+from urllib.parse import urlparse
 from mimetypes import guess_type
 import unicodedata
 
@@ -61,7 +64,7 @@ def sendfile(request, filename, attachment=False, attachment_filename=None, mime
 
     if parseresult.scheme:
         basename = os.path.basename(parseresult.path)
-        with contextlib.closing(urllib2.urlopen(filename)) as result:
+        with contextlib.closing(urllib.request.urlopen(filename)) as result:
             headers = result.headers.dict
         mimetype = headers['content-type']
         contentlength = headers['content-length']

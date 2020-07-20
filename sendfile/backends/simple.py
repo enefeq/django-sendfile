@@ -1,9 +1,11 @@
+from future import standard_library
+standard_library.install_aliases()
 import os
 import stat
 import re
 import contextlib
-import urllib2
-from urlparse import urlparse
+import urllib.request
+from urllib.parse import urlparse
 try:
     from email.utils import parsedate_tz, mktime_tz
 except ImportError:
@@ -19,7 +21,7 @@ def sendfile(request, filename, **kwargs):
     parseresult = urlparse(filename)
 
     if parseresult.scheme:
-        with contextlib.closing(urllib2.urlopen(filename)) as result:
+        with contextlib.closing(urllib.request.urlopen(filename)) as result:
             headers = result.headers.dict
             data = result.read()
         lastmodified = parse_http_date(headers['last-modified'])
