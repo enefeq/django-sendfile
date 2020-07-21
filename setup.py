@@ -19,8 +19,8 @@ setup(
     url='https://github.com/kbussell/django-sendfile',
     license='BSD',
 
-    requires=['Django (>=1.3)', 'future (0.18.2)'],
-    install_requires=['Django>=1.3', 'future==0.18.2'],
+    requires=['Django (>=1.3)', 'future (>=0.18.2)'],
+    install_requires=['Django>=1.3', 'future>=0.18.2'],
 
     packages=['sendfile', 'sendfile.backends'],
     package_dir={
