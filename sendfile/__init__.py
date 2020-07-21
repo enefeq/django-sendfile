@@ -1,13 +1,11 @@
-from future import standard_library
-standard_library.install_aliases()
+
 from builtins import map
 VERSION = (0, 3, 12, 1)
 __version__ = '.'.join(map(str, VERSION))
 
 import os
 import contextlib
-import urllib.request
-from urllib.parse import urlparse
+
 from mimetypes import guess_type
 import unicodedata
 
@@ -58,6 +56,16 @@ def sendfile(request, filename, attachment=False, attachment_filename=None, mime
     If no mimetype or encoding are specified, then they will be guessed via the
     filename (using the standard python mimetypes module)
     '''
+
+    #TODO: PY3Upgrade - Cleanup
+    # Intentially ninja import future libraries into ridiculous __init__.py file
+    # (python 3 upgrade, py2/3 compatible)
+
+    from future import standard_library
+    standard_library.install_aliases()
+    import urllib.request
+    from urllib.parse import urlparse
+
     _sendfile = _get_sendfile()
 
     parseresult = urlparse(filename)
