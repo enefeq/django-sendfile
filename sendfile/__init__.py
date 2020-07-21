@@ -1,7 +1,7 @@
 from future import standard_library
 standard_library.install_aliases()
 from builtins import map
-VERSION = (0, 3, 11, 1)
+VERSION = (0, 3, 12, 1)
 __version__ = '.'.join(map(str, VERSION))
 
 import os
