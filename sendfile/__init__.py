@@ -1,6 +1,4 @@
-
-from builtins import map
-VERSION = (0, 3, 12, 1)
+VERSION = (0, 3, 13, 1)
 __version__ = '.'.join(map(str, VERSION))
 
 import os
@@ -10,7 +8,7 @@ from mimetypes import guess_type
 import unicodedata
 
 
-def _lazy_load(fn):
+def _lazy_load(fn): 
     _cached = []
     def _decorated():
         if not _cached:
@@ -58,9 +56,9 @@ def sendfile(request, filename, attachment=False, attachment_filename=None, mime
     '''
 
     #TODO: PY3Upgrade - Cleanup
-    # Intentially ninja import future libraries into ridiculous __init__.py file
+    # Intentionally ninja import future libraries into ridiculous __init__.py file
     # (python 3 upgrade, py2/3 compatible)
-
+    from builtins import map
     from future import standard_library
     standard_library.install_aliases()
     import urllib.request
