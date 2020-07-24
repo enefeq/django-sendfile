@@ -58,7 +58,6 @@ def sendfile(request, filename, attachment=False, attachment_filename=None, mime
     #TODO: PY3Upgrade - Cleanup
     # Intentionally ninja import future libraries into ridiculous __init__.py file
     # (python 3 upgrade, py2/3 compatible)
-    from builtins import map
     from future import standard_library
     standard_library.install_aliases()
     import urllib.request
@@ -71,9 +70,8 @@ def sendfile(request, filename, attachment=False, attachment_filename=None, mime
     if parseresult.scheme:
         basename = os.path.basename(parseresult.path)
         with contextlib.closing(urllib.request.urlopen(filename)) as result:
-            headers = result.headers.dict
-        mimetype = headers['content-type']
-        contentlength = headers['content-length']
+            mimetype = result.headers['content-type']
+            contentlength = result.headers['content-length']
 
     else:
         if not os.path.exists(filename):
